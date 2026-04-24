@@ -10,7 +10,7 @@ class TokenizedDocument:
     _nlp_processors = "tokenize,mwt,pos,lemma"
 
     def __init__(self, filename: str):
-        self.analyzed_sentences = None
+        self.analysed_sentences = None
         self.filename = filename
         self.tree = etree.parse(self.filename)
 
@@ -36,15 +36,15 @@ class TokenizedDocument:
 
         return pipeline
 
-    def analyze_sentences(self):
-        if self.analyzed_sentences is not None:
-            return self.analyzed_sentences
+    def analyse_sentences(self):
+        if self.analysed_sentences is not None:
+            return self.analysed_sentences
 
         pipeline = TokenizedDocument.get_pipeline(self.language)
 
-        self.analyzed_sentences = pipeline(self.sentences)
+        self.analysed_sentences = pipeline(self.sentences)
 
-        return self.analyzed_sentences
+        return self.analysed_sentences
 
     def gather_sentences(self):
         self.sentences = []
