@@ -1,0 +1,14 @@
+[
+    {
+        "target_urn": "urn:cts:greekLit:tlg0011.tlg001",
+        "content": "<p>Scene:—At Trachis, before the house of Heracles.</p>"
+    },
+    {
+        "target_urn": "urn:cts:greekLit:tlg0011.tlg001:1-93",
+        "content": "<head>1-93</head><p> Prologue. Deianeira declares her anxiety concerning Heracles, who has been fifteen months absent. Her son Hyllus sets forth to seek his father in Euboea.</p>"
+    },
+    {
+        "target_urn": "urn:cts:greekLit:tlg0011.tlg001:1",
+        "content": "<p><mentioned ana=\"#λόγος_ἀνθρώπων_1\">λόγος … ἀνθρώπων    </mentioned>    <gloss xml:id=\"λόγος_ἀνθρώπων_1\">, as Archil. fr. 86 <quote xml:lang=\"grc\">α&lt;*&gt;νός τις ἀνθρώπων ὅδε</quote>: <ref n=\"Pind. O. 7\">Pind. <title>O.</title>7. 54</ref>        <quote xml:lang=\"grc\">ἀνθρώπων παλαιαὶ ῥήσιες</quote>, id. <ref n=\"Pind. N. 9\">Pind. <title>N.</title>9. 6</ref>        <quote xml:lang=\"grc\">ἔστι δέ τις λόγος ἀνθρώπων</quote>: <ref n=\"Soph. Aj. 664\">Soph. <title>Ai.</title>664</ref>        <quote xml:lang=\"grc\">ἡ βροτῶν παροιμία. <emph>ἀρχαῖος</emph>        </quote>    goes adverbially with </gloss>    <mentioned ana=\"#φανείς_1\">φανείς    </mentioned>    <gloss xml:id=\"φανείς_1\">, ‘put forth    of old’; cp. <ref n=\"Soph. Ant. 593\">Soph. <title>Ant.</title>593</ref>    f. <quote xml:lang=\"grc\">ἀρχαῖα</quote>... | ...<quote xml:lang=\"grc\">    πίπτοντ’</quote>: and <emph>ib.</emph> 621 <quote xml:lang=\"grc\">σοφίᾳ    γὰρ ἔκ του κλεινὸν ἔπος πέφανται</quote> (n.). L's accentuation, </gloss>    <mentioned ana=\"#ἔστ_1\">ἔστ’    </mentioned>    <gloss xml:id=\"ἔστ_1\">, is right: <quote xml:lang=\"grc\">ἐστὶ    φανείς</quote> as=<quote xml:lang=\"grc\">πέφανται</quote> would be weak    here. For the order of the words (<quote xml:lang=\"grc\">ἀνθρώπων</quote>    separating <quote xml:lang=\"grc\">ἀρχαῖος</quote> from <quote xml:lang=\"grc\">φανείς</quote>), cp. <ref n=\"Soph. Ant. 944\">Soph. <title>    Ant.</title>944</ref> f. As to the <quote xml:lang=\"grc\">γνώμη</quote>    itself, see <ref n=\"Soph. OT 1529\">Soph. <title>O. T.</title>1529</ref>    n.</gloss></p><p>Boissonade (<title>Notul. in Trach.</title>, 1), replying to the    criticism that this <quote xml:lang=\"grc\">γνώμη</quote> passed as    Solon's, quotes a remark of Balzac's to this effect: ‘though Deianeira    was older than Solon, she was younger than proverbial philosophy.’ So    Ajax cites a maxim ascribed to Bias ( <ref n=\"Soph. Aj. 679\">Soph. <title>    Ai.</title>679</ref>). </p>"
+    }
+]

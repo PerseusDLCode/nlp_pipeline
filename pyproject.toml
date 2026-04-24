@@ -1,0 +1,26 @@
+[project]
+name = "nlp-pipeline"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Charles Pletcher", email = "cpletcher2@gmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "lxml>=6.1.0",
+    "stanza>=1.11.1",
+]
+
+[project.scripts]
+nlp-pipeline = "nlp_pipeline:main"
+
+[build-system]
+requires = ["uv_build>=0.11.7,<0.12.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.3",
+    "ruff>=0.15.11",
+]

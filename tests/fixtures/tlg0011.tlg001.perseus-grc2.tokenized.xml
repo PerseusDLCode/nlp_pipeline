@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xml:lang="grc">
+    <tokens sentence-id="1">
+        <token
+            urn="urn:cts:greekLit:tlg0011.tlg001.perseus-grc2:1"
+            surface="λόγος"
+            raw="λόγος "
+            position="1"
+        />
+        <token
+            urn="urn:cts:greekLit:tlg0011.tlg001.perseus-grc2:1"
+            surface="μέν"
+            raw="μέν "
+            position="2"
+        />
+        <token
+            urn="urn:cts:greekLit:tlg0011.tlg001.perseus-grc2:1"
+            surface="ἐστ"
+            raw="ἐστ' "
+            position="3"
+        />
+        <token
+            urn="urn:cts:greekLit:tlg0011.tlg001.perseus-grc2:1"
+            surface="ἀρχαῖος"
+            raw="ἀρχαῖος "
+            position="4"
+        />
+        <token
+            urn="urn:cts:greekLit:tlg0011.tlg001.perseus-grc2:1"
+            surface="ἀνθρώπων"
+            raw="ἀνθρώπων "
+            position="5"
+        />
+        <token position="6" surface="φανείς" raw="φανείς, " urn="urn:cts:greekLit:tlg0011.tlg001:1" />
+        <token position="7" surface="ὡς" raw="ὡς " urn="urn:cts:greekLit:tlg0011.tlg001:2" />
+        <token position="8" surface="οὐκ" raw="οὐκ " urn="urn:cts:greekLit:tlg0011.tlg001:2" />
+        <token position="9" surface="ἂν" raw="ἂν " urn="urn:cts:greekLit:tlg0011.tlg001:2" />
+        <token position="10" surface="αἰῶν̓" raw="αἰῶν̓ " urn="urn:cts:greekLit:tlg0011.tlg001:2" />
+        <token position="11" surface="ἐκμάθοις" raw="ἐκμάθοις "
+            urn="urn:cts:greekLit:tlg0011.tlg001:2" />
+        <token position="12" surface="βροτῶν" raw="βροτῶν, " urn="urn:cts:greekLit:tlg0011.tlg001:2" />
+        <token position="13" surface="πρὶν" raw="πρὶν " urn="urn:cts:greekLit:tlg0011.tlg001:2" />
+        <token position="14" surface="ἂν" raw="ἂν " urn="urn:cts:greekLit:tlg0011.tlg001:2" />
+        <token position="15" surface="θάνῃ" raw="θάνῃ " urn="urn:cts:greekLit:tlg0011.tlg001:3" />
+        <token position="16" surface="τις" raw="τις, " urn="urn:cts:greekLit:tlg0011.tlg001:3" />
+        <token position="17" surface="οὔ" raw="οὔ " urn="urn:cts:greekLit:tlg0011.tlg001:3" />
+        <token position="18" surface="τ" raw="τ' " urn="urn:cts:greekLit:tlg0011.tlg001:3" />
+        <token position="19" surface="εἰ" raw="εἰ " urn="urn:cts:greekLit:tlg0011.tlg001:3" />
+        <token position="20" surface="χρηστὸς" raw="χρηστὸς "
+            urn="urn:cts:greekLit:tlg0011.tlg001:3" />
+        <token position="21" surface="οὔ" raw="οὔ " urn="urn:cts:greekLit:tlg0011.tlg001:3" />
+        <token position="22" surface="τ" raw="τ' " urn="urn:cts:greekLit:tlg0011.tlg001:3" />
+        <token position="23" surface="εἴ" raw="εἴ " urn="urn:cts:greekLit:tlg0011.tlg001:3" />
+        <token position="24" surface="τῳ" raw="τῳ " urn="urn:cts:greekLit:tlg0011.tlg001:3" />
+        <token position="25" surface="κακός" raw="κακός· " urn="urn:cts:greekLit:tlg0011.tlg001:3" />
+    </tokens>
+</document>
