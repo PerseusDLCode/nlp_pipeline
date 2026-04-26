@@ -20,3 +20,5 @@ stanza_models
 .pytest_cache
 
 *.standoff.xml
+
+data/
