@@ -12,4 +12,5 @@ class TestBaseText:
 
         doc.analyse_sentences()
 
+        print(doc.analysed_sentences.sentences)
         assert len(doc.analysed_sentences.sentences) > 0

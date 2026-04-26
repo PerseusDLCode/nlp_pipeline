@@ -10,3 +10,11 @@ wheels/
 .venv
 .DS_Store
 stanza_models
+
+# clj
+.calva
+.cpcache
+.nrepl-port
+.clj-kondo
+.lsp
+.pytest_cache
