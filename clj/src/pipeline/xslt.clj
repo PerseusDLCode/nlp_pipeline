@@ -1,7 +1,11 @@
 (ns pipeline.xslt
   (:import [net.sf.saxon.s9api Processor XdmDestination]
            [javax.xml.transform.stream StreamSource]
-           [java.io File]))
+           [java.io File])
+  (:require [clojure.java.io :as io]
+            [clojure.pprint :as pprint]
+            [clojure.string :as string]
+            [babashka.fs :as fs]))
 
 (def ^Processor processor (Processor. false))
 
@@ -23,19 +27,34 @@
 
 (defn serialize-to-file
   [node ^String output-path]
+  (pprint/pprint output-path)
   (.serializeNode (.newSerializer processor (File. output-path)) node))
 
+(defn standoff-filename
+  [^File f]
+  (let [basename (.getName f)
+        without-ext (first (fs/split-ext basename))
+        parent (.getParent f)]
+    (str parent "/" without-ext ".standoff.xml")))
+
 (defn run-pipeline
-  [xslt-dir input-path output-path]
-  (let [number-transformer (compile-stylesheet (str xslt-dir "/number-annotations.xsl"))
-        standoff-transformer (compile-stylesheet (str xslt-dir "/inline-to-standoff.xsl"))
-        numbered (run-transform number-transformer (StreamSource. (File. input-path)))
-        result (run-transform standoff-transformer (.asSource numbered))]
-    (serialize-to-file result output-path)))
+  [input-path]
+  (let [xslt-dir "resources/xslt"
+        number-transformer (compile-stylesheet (str xslt-dir "/number-annotations.xsl"))
+        standoff-transformer (compile-stylesheet (str xslt-dir "/inline-to-standoff.xsl"))]
+    (for [f (filter #(and
+                      (.isFile %)
+                      (string/ends-with? (str %) ".xml")
+                      (not (string/ends-with? (str %) "__cts__.xml")))
+                    (file-seq (io/file input-path)))
+          :let  [numbered (run-transform number-transformer (StreamSource. f))
+                 result (run-transform standoff-transformer (.asSource numbered))
+                 output-path (standoff-filename f)]]
+      (serialize-to-file result output-path))))
 
 (defn -main [& args]
-  (when (not= (count args) 3)
-    (println "Usage: pipeline <xslt-dir> <input-path> <output-path>")
+  (when (not= (count args) 1)
+    (println "Usage: pipeline <input-path>")
     (System/exit 1))
-  (let [[xslt-dir input-path output-path] args]
-    (run-pipeline xslt-dir input-path output-path)))
+  (let [[input-path] args]
+    (run-pipeline input-path)))

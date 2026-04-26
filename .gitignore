@@ -18,3 +18,5 @@ stanza_models
 .clj-kondo
 .lsp
 .pytest_cache
+
+*.standoff.xml
