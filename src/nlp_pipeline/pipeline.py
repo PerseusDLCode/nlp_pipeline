@@ -41,15 +41,6 @@ LANG_ID_CONFIG = {
 }
 
 
-def set_cts_urn(self, value: str):
-    self._cts_urn = value
-
-
-Token.add_property(
-    "cts_urn", default=None, getter=lambda self: self._cts_urn, setter=set_cts_urn
-)
-
-
 class NLPPipeline:
     _nlp: MultilingualPipeline | None = None
     _tokenizer: MultilingualPipeline | None = None
@@ -93,7 +84,7 @@ class NLPPipeline:
     def process(self, document: str):
         return self.nlp(document)
 
-    def tokenize(self, document: str):
+    def tokenize(self, document: str) -> stanza.Document:
         """Tokenize a citable chunk of text,
         adding a CTS URN to each token so that
         they can be reassembled properly later.
