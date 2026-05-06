@@ -1,3 +1,0 @@
-{:paths ["src" "resources"]
- :deps {net.sf.saxon/Saxon-HE {:mvn/version "12.9"}
-        babashka/fs {:mvn/version "0.5.33"}}}
