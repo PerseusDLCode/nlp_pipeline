@@ -7,6 +7,25 @@ The API will assign identifiers to each token that are unique by chunk:
 `{token}[{1-based index}]`. It is up to the service using the API to
 ensure that these identifiers are globally unique for its purposes.
 
+## Using/developing locally
+
+This project uses [`uv`](https://docs.astral.sh/uv/) for dependency management.
+
+To run the server locally, clone this repository, `cd` into the cloned
+directory, and run
+
+```sh
+uv sync
+uv run fastapi dev
+```
+
+Tests are handled by `pytest`. After activating the virtual environment
+(which `uv` should create when you call `uv sync`), just run
+
+```sh
+pytest
+```
+
 ## LICENSE
 
 MIT License
