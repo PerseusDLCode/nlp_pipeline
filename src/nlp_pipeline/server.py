@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Optional
 
 from fastapi import FastAPI
 from pydantic import BaseModel
@@ -21,12 +21,12 @@ class TextToken(BaseModel):
 
 class TokenizableChunk(BaseModel):
     content: str
-    extra: dict[str, Any]
+    extra: Optional[dict[str, Any]] = None
 
 
 class TokenizedChunk(BaseModel):
     content: str
-    extra: dict[str, Any]
+    extra: dict[str, Any] | None
     lang: str
     tokens: list[TextToken]
 

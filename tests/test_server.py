@@ -38,3 +38,12 @@ def test_tokenize_indexes_tokens():
 
     assert brown[0]["identifier"] == "brown[1]"
     assert brown[1]["identifier"] == "brown[2]"
+
+
+def test_tokenize_works_without_extra():
+    response = client.post(
+        "tokenize",
+        json={"content": "The quick brown fox is brown and quick."},
+    )
+
+    assert response.status_code == 200
