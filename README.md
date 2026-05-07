@@ -19,6 +19,11 @@ uv sync
 uv run fastapi dev
 ```
 
+Note that while the server is running, you can access interactive documentation
+at `/docs`.
+
+### Testing
+
 Tests are handled by `pytest`. After activating the virtual environment
 (which `uv` should create when you call `uv sync`), just run
 
