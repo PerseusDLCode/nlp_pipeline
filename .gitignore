@@ -22,3 +22,5 @@ stanza_models
 *.standoff.xml
 
 data/
+
+openapi.json
