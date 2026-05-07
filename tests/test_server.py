@@ -10,7 +10,7 @@ def test_tokenize():
         "tokenize",
         json={
             "content": "The quick brown fox is brown and quick.",
-            "identifier": "urn:test:sentence:1",
+            "extra": {"identifier": "urn:test:sentence:1"},
         },
     )
 
@@ -19,3 +19,22 @@ def test_tokenize():
     resp_body = response.json()
 
     assert len(resp_body["tokens"]) == 9
+
+
+def test_tokenize_indexes_tokens():
+    response = client.post(
+        "tokenize",
+        json={
+            "content": "The quick brown fox is brown and quick.",
+            "extra": {"identifier": "urn:test:sentence:1"},
+        },
+    )
+
+    assert response.status_code == 200
+
+    resp_body = response.json()
+
+    brown = [t for t in resp_body["tokens"] if t["text"].startswith("brown")]
+
+    assert brown[0]["identifier"] == "brown[1]"
+    assert brown[1]["identifier"] == "brown[2]"
