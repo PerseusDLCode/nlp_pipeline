@@ -85,7 +85,13 @@ class NLPPipeline:
 
         return cls._tokenizer
 
-    def process(self, chunk: TokenizedChunk):
+    def analyse(self, chunk: TokenizedChunk) -> TokenizedChunk:
+        return self.analyze(chunk)
+
+    def analyze(self, chunk: TokenizedChunk) -> TokenizedChunk:
+        if type(chunk) is str:
+            chunk = self.tokenize(chunk)
+
         chunk_str = ""
 
         for t in chunk.tokens:

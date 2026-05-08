@@ -1,5 +1,4 @@
 from nlp_pipeline.pipeline import NLPPipeline
-from nlp_pipeline.types import TokenizableChunk
 
 
 class TestPipeline:

@@ -15,7 +15,7 @@ def root():
 @app.post("/analyse")
 @app.post("/analyze")
 def post_analyze(chunk: TokenizedChunk) -> TokenizedChunk:
-    return pipeline.process(chunk)
+    return pipeline.analyze(chunk)
 
 
 @app.post("/tokenize")

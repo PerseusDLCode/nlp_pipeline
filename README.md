@@ -11,6 +11,8 @@ ensure that these identifiers are globally unique for its purposes.
 
 This project uses [`uv`](https://docs.astral.sh/uv/) for dependency management.
 
+### Using the HTTP API
+
 To run the server locally, clone this repository, `cd` into the cloned
 directory, and run
 
@@ -21,6 +23,20 @@ uv run fastapi dev
 
 Note that while the server is running, you can access interactive documentation
 at `/docs`.
+
+### Using the module directly
+
+You can also import the `NLPPipeline` class from `nlp_pipeline.pipeline` and
+call it directly, without needing to go through the HTTP API.
+
+```python
+from nlp_pipeline.pipeline import NLPPipeline
+
+pipeline = NLPPipeline()
+
+tokenized = pipeline.tokenize("The quick brown fox is brown and quick.")
+analyzed = pipeline.analyze(tokenized)
+```
 
 ### Testing
 
