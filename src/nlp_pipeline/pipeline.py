@@ -45,6 +45,58 @@ def token_identifier(token: Token, count: int):
     return f"{token.text.strip()}[{count}]"
 
 
+def _build_token(token: Token, identifier: str) -> TextToken:
+    words = [
+        TextWord(
+            id=word.id,
+            deprel=word.deprel,
+            deps=word.deps,
+            feats=word.feats,
+            head=word.head,
+            lemma=word.lemma,
+            misc=word.misc,
+            text=word.text,
+            upos=word.upos,
+            xpos=word.xpos,
+        )
+        for word in token.words
+    ]
+    return TextToken(
+        end_char=token.end_char,
+        id=token.id,
+        identifier=identifier,
+        start_char=token.start_char,
+        text=token.text,
+        whitespace=len(token.spaces_after) > 0,
+        words=words,
+    )
+
+
+def _collect_tokens(
+    doc, pretokenized: list[TextToken] | None = None
+) -> list[TextToken]:
+    token_counts = {}
+    tokens: list[TextToken] = []
+
+    for token in doc.iter_tokens():
+        token_text = token.text.strip()
+        count = token_counts.get(token_text, 0) + 1
+        identifier = token_identifier(token, count)
+        t = _build_token(token, identifier)
+
+        if pretokenized is not None:
+            match = next((p for p in pretokenized if p.identifier == identifier), None)
+            if match is not None:
+                t.identifier = match.identifier
+            else:
+                print(f"No pretokenized match found for {token.to_dict()}.")
+
+        token_counts[token_text] = count
+        tokens.append(t)
+
+    return tokens
+
+
 class NLPPipeline:
     _nlp: MultilingualPipeline | None = None
     _tokenizer: MultilingualPipeline | None = None
@@ -85,81 +137,25 @@ class NLPPipeline:
 
         return cls._tokenizer
 
-    def analyse(self, chunk: TokenizedChunk) -> TokenizedChunk:
-        return self.analyze(chunk)
-
     def analyze(self, chunk: TokenizedChunk) -> TokenizedChunk:
-        if type(chunk) is str:
-            chunk = self.tokenize(chunk)
-
-        chunk_str = ""
-
-        for t in chunk.tokens:
-            chunk_str += t.text
-
-            if t.whitespace:
-                chunk_str += " "
-
+        chunk_str = "".join(
+            t.text + (" " if t.whitespace else "") for t in chunk.tokens
+        )
         nlped = self.nlp(chunk_str)
-        token_counts = {}
-        tokens: list[TextToken] = []
-
-        for token in nlped.iter_tokens():
-            token_text = token.text.strip()
-            count = token_counts.get(token_text, 0) + 1
-            identifier = token_identifier(token, count)
-            pretokenized_match = next(
-                (t for t in chunk.tokens if t.identifier == identifier), None
-            )
-
-            words = [
-                TextWord(
-                    id=word.id,
-                    deprel=word.deprel,
-                    deps=word.deps,
-                    feats=word.feats,
-                    head=word.head,
-                    lemma=word.lemma,
-                    misc=word.misc,
-                    text=word.text,
-                    upos=word.upos,
-                    xpos=word.xpos,
-                )
-                for word in token.words
-            ]
-            t: TextToken = TextToken(
-                end_char=token.end_char,
-                id=token.id,
-                identifier=identifier,
-                start_char=token.start_char,
-                text=token.text,
-                whitespace=len(token.spaces_after) > 0,
-                words=words,
-            )
-
-            # For now, we just reassign the identifer.
-            # It _should_ be the same as before, but
-            # this way we can be sure to match up the results.
-            if pretokenized_match is not None:
-                t.identifier = pretokenized_match.identifier
-            else:
-                print(f"No pretokenized match found for {token.to_dict()}.")
-
-            token_counts[token_text] = count
-
-            tokens.append(t)
-
-        content: str = chunk.content
-        lang: str = nlped.lang
 
         return TokenizedChunk(
-            content=content,
+            content=chunk.content,
             extra=chunk.extra,
-            lang=lang,
-            tokens=tokens,
+            lang=nlped.lang,
+            tokens=_collect_tokens(nlped, pretokenized=chunk.tokens),
         )
 
-    def tokenize(self, chunk: TokenizableChunk | str) -> TokenizedChunk:
+    def analyze_str(self, s: str) -> TokenizedChunk:
+        chunk = self.tokenize_str(s)
+
+        return self.analyze(chunk)
+
+    def tokenize(self, chunk: TokenizableChunk) -> TokenizedChunk:
         """Tokenize a citable chunk of text,
         adding a CTS URN to each token so that
         they can be reassembled properly later.
@@ -171,54 +167,16 @@ class NLPPipeline:
         or pages frequently used for citations).
         """
 
-        if type(chunk) is str:
-            chunk = TokenizableChunk(content=chunk)
-
-        tokenized = self.tokenizer(chunk.content)  # ty:ignore[unresolved-attribute]
-        token_counts = {}
-        tokens: list[TextToken] = []
-
-        for token in tokenized.iter_tokens():
-            token_text = token.text.strip()
-            count = token_counts.get(token_text, 0) + 1
-            identifier = token_identifier(token, count)
-
-            words = [
-                TextWord(
-                    id=word.id,
-                    deprel=word.deprel,
-                    deps=word.deps,
-                    feats=word.feats,
-                    head=word.head,
-                    lemma=word.lemma,
-                    misc=word.misc,
-                    text=word.text,
-                    upos=word.upos,
-                    xpos=word.xpos,
-                )
-                for word in token.words
-            ]
-
-            t: TextToken = TextToken(
-                end_char=token.end_char,
-                id=token.id,
-                identifier=identifier,
-                start_char=token.start_char,
-                text=token.text,
-                whitespace=len(token.spaces_after) > 0,
-                words=words,
-            )
-
-            token_counts[token_text] = count
-
-            tokens.append(t)
-
-        content: str = chunk.content  # ty:ignore[unresolved-attribute]
-        lang: str = tokenized.lang
+        tokenized = self.tokenizer(chunk.content)
 
         return TokenizedChunk(
-            content=content,
-            extra=chunk.extra,  # ty:ignore[unresolved-attribute]
-            lang=lang,
-            tokens=tokens,
+            content=chunk.content,
+            extra=chunk.extra,
+            lang=tokenized.lang,
+            tokens=_collect_tokens(tokenized),
         )
+
+    def tokenize_str(self, s: str) -> TokenizedChunk:
+        chunk = TokenizableChunk(content=s)
+
+        return self.tokenize(chunk)
